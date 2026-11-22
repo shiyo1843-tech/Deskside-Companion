@@ -1,0 +1,41 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <Style TargetType="Button">
+  <Setter Property="Cursor" Value="Hand"/><Setter Property="Foreground" Value="#443C50"/>
+  <Setter Property="Background" Value="#F2EDF7"/><Setter Property="BorderBrush" Value="#E4DAEC"/>
+  <Setter Property="BorderThickness" Value="1"/><Setter Property="Padding" Value="15,8"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+   <Border x:Name="tile" CornerRadius="9" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+   </Border><ControlTemplate.Triggers>
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="tile" Property="Opacity" Value=".83"/></Trigger>
+    <Trigger Property="IsPressed" Value="True"><Setter TargetName="tile" Property="Opacity" Value=".65"/></Trigger>
+    <Trigger Property="IsEnabled" Value="False"><Setter TargetName="tile" Property="Opacity" Value=".5"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="TabControl"><Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabControl"><DockPanel>
+   <Border DockPanel.Dock="Top" CornerRadius="12" Background="#F0EDF3" Padding="4" Margin="0,0,0,12"><UniformGrid Rows="1" IsItemsHost="True"/></Border>
+   <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" TextElement.FontWeight="Normal"/>
+  </DockPanel></ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="TabItem"><Setter Property="Cursor" Value="Hand"/><Setter Property="Foreground" Value="#7B7283"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabItem"><Border x:Name="cap" Padding="8,8" CornerRadius="8" Background="Transparent">
+   <ContentPresenter ContentSource="Header" HorizontalAlignment="Center"/></Border><ControlTemplate.Triggers>
+   <Trigger Property="IsSelected" Value="True"><Setter TargetName="cap" Property="Background" Value="White"/><Setter Property="Foreground" Value="#4A325E"/><Setter Property="FontWeight" Value="SemiBold"/></Trigger>
+   <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="cap" Property="BorderBrush" Value="#D7CADF"/><Setter TargetName="cap" Property="BorderThickness" Value="1"/></Trigger>
+  </ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ListBox"><Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/><Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/></Style>
+ <Style TargetType="ListBoxItem"><Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Foreground" Value="#35283E"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem"><Border x:Name="card" CornerRadius="11" Margin="0,2" Padding="11,7" BorderThickness="1" BorderBrush="#EBE5EC" Background="#FFFFFF"><ContentPresenter/></Border>
+   <ControlTemplate.Triggers><Trigger Property="IsSelected" Value="True"><Setter TargetName="card" Property="Background" Value="#F2EBF8"/><Setter TargetName="card" Property="BorderBrush" Value="#B9A1CA"/></Trigger>
+   <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="card" Property="BorderBrush" Value="#A68ABA"/></Trigger></ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="TextBox"><Setter Property="Foreground" Value="#362D40"/><Setter Property="Background" Value="White"/><Setter Property="CaretBrush" Value="#683D85"/><Setter Property="Padding" Value="10,7"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TextBox"><Border x:Name="box" Background="{TemplateBinding Background}" BorderBrush="#DCD4DF" BorderThickness="1" CornerRadius="8" Padding="{TemplateBinding Padding}"><ScrollViewer x:Name="PART_ContentHost"/></Border>
+  <ControlTemplate.Triggers><Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="box" Property="BorderBrush" Value="#8665A3"/></Trigger></ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+</ResourceDictionary>

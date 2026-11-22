@@ -1,0 +1,14 @@
+Desktop character animations
+
+Universal Animation Library by Quaternius
+https://quaternius.com/packs/universalanimationlibrary.html
+Creative Commons CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/
+Selected character animation clips were converted to Unity Humanoid AnimationClip assets for playback on different avatars.
+
+Unity Timeline GameplaySequenceDemo, Nav-Accelerations (Walk, frames 31–67) and Turns_StartStop-Wk (frames 103–155)
+Timeline copyright © 2022 Unity Technologies
+Licensed under the Unity Companion License for Unity-dependent projects.
+https://unity.com/legal/licenses/unity-companion-license
+Unless expressly provided otherwise, the Software under this license is made available strictly on an “AS IS” BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+The extracted walk and stop are used in the Unity player and editable Unity project.
