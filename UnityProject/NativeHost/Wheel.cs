@@ -9,7 +9,7 @@ using System.Windows.Automation;
 using ShapePath=System.Windows.Shapes.Path;
 
 namespace DeskPet;
-public sealed class Wheel:Window {
+public sealed partial class Wheel:Window {
     record Slice(string Text,string Icon,Action Run,bool On=false,bool Enabled=true);
     readonly PetWindow pet;
     bool embedded;
@@ -144,6 +144,7 @@ public sealed class Wheel:Window {
         if(visible.Count==0)visible.Add(new("返回","Back",Back));
         // Two half-arcs avoid the degeneracy of an SVG-style full-circle arc.
         if(visible.Count==1)visible.Add(new("返回","Back",Back));
+        if(route=="home"){DrawStarHome(visible);return;}
         double span=360.0/visible.Count;for(int i=0;i<visible.Count;i++)Piece(visible[i],-90-span/2+i*span,-90+span/2+i*span);
         Center();
     }

@@ -12,6 +12,7 @@
   <ItemGroup>
     <Resource Include="Brand/DeskPet.ico"/>
     <EmbeddedResource Include="Icons/*.png" LogicalName="WheelIcons.%(Filename).png"/>
+    <EmbeddedResource Include="StarWheel/*.png" LogicalName="StarWheel.%(Filename).png"/>
     <EmbeddedResource Include="../Assets/DeskPet/Editor/DeskPetExporter.cs;../ExternalTools/VRChat/DeskPetVRChat.cs;../ExternalTools/VRChat/DeskPetPackageBuild.cs" LogicalName="PackageTools.%(Filename)%(Extension)"/>
   </ItemGroup>
 </Project>
