@@ -60,27 +60,27 @@ public sealed partial class Studio:Window {
 
         BuildServicePage();
         var display=new StackPanel{Margin=new Thickness(5)};Tab("显示",new ScrollViewer{Content=display,VerticalScrollBarVisibility=ScrollBarVisibility.Auto});
-        display.Children.Add(Text("渲染分辨率",17));
-        var quality=new ComboBox{Padding=new Thickness(8,5,8,5)}; Id(quality,"quality");
+        var qualityCard=DisplayCard(display,"画质",true);
+        var quality=new ComboBox();Id(quality,"quality");
         foreach(int w in Renderer.Widths)quality.Items.Add(w+" × "+(w*11/9)+" 像素");
-        quality.SelectedIndex=Math.Clamp(pet.Store.Data.Detail,0,3);quality.SelectionChanged+=(_,_)=>{pet.SetDetail(quality.SelectedIndex);Status("清晰度已保存 · "+quality.SelectedItem);};display.Children.Add(quality);
-        void Check(string name,bool enabled,Action<bool> change){
-            var box=new CheckBox{Content=name,IsChecked=enabled,Margin=new Thickness(0,6,0,3)};
-            box.Click+=(_,_)=>{change(box.IsChecked==true);pet.Store.Save();};display.Children.Add(box);
+        quality.SelectedIndex=Math.Clamp(pet.Store.Data.Detail,0,3);quality.SelectionChanged+=(_,_)=>{pet.SetDetail(quality.SelectedIndex);Status("清晰度已保存 · "+quality.SelectedItem);};
+        DisplayField(qualityCard,"渲染分辨率",quality);
+        void Check(Panel group,string name,bool enabled,Action<bool> change){
+            var box=DisplayCheck(name,enabled);
+            box.Click+=(_,_)=>{change(box.IsChecked==true);pet.Store.Save();};group.Children.Add(box);
         }
-        Check("按桌面大小优化渲染",pet.Store.Data.Adaptive,on=>{pet.Store.Data.Adaptive=on;pet.UpdateViewport();});
-        display.Children.Add(frameRate);
-        display.Children.Add(Text("当前角色的灯光亮度",16));
+        Check(qualityCard,"按桌面大小优化渲染",pet.Store.Data.Adaptive,on=>{pet.Store.Data.Adaptive=on;pet.UpdateViewport();});
+        qualityCard.Children.Add(DisplayMeter(frameRate));
         Id(lighting,"character-light");foreach(int value in LightLevels)lighting.Items.Add(value==100?"100% · 模型默认":value+"%");
-        lighting.SelectionChanged+=(_,_)=>{if(!refreshing && lighting.SelectedIndex>=0)pet.SetLighting(LightLevels[lighting.SelectedIndex]);};display.Children.Add(lighting);
-        display.Children.Add(Text("桌面互动",16));
-        Check("允许角色在桌面上走动",pet.Store.Data.Roam,on=>{pet.Store.Data.Roam=on;pet.PauseActivity();});
-        display.Children.Add(Text("自主动作间隔",14));
+        lighting.SelectionChanged+=(_,_)=>{if(!refreshing && lighting.SelectedIndex>=0)pet.SetLighting(LightLevels[lighting.SelectedIndex]);};
+        DisplayField(qualityCard,"当前角色的灯光亮度",lighting);
+        var motionCard=DisplayCard(display,"桌面互动",false);
+        Check(motionCard,"允许角色在桌面上走动",pet.Store.Data.Roam,on=>{pet.Store.Data.Roam=on;pet.PauseActivity();});
         var frequency=new ComboBox{ItemsSource=new[]{"安静 · 45–80 秒","适中 · 22–40 秒","活泼 · 10–20 秒"},SelectedIndex=Math.Clamp(pet.Store.Data.ActivityFrequency,0,2)};
         frequency.SelectionChanged+=(_,_)=>{pet.Store.Data.ActivityFrequency=frequency.SelectedIndex;pet.ScheduleRest();pet.Store.Save();};
-        display.Children.Add(frequency);
-        Check("在角色旁显示聊天回复",pet.Store.Data.Bubbles,on=>{pet.Store.Data.Bubbles=on;if(!on)pet.ClearBubble();});
-        Check("让 AI 随聊天做动作和表情",pet.Store.Data.ChatActions,on=>{pet.Store.Data.ChatActions=on;if(!on)pet.CancelChatReaction();});
+        DisplayField(motionCard,"自主动作间隔",frequency);
+        Check(motionCard,"在角色旁显示聊天回复",pet.Store.Data.Bubbles,on=>{pet.Store.Data.Bubbles=on;if(!on)pet.ClearBubble();});
+        Check(motionCard,"让 AI 随聊天做动作和表情",pet.Store.Data.ChatActions,on=>{pet.Store.Data.ChatActions=on;if(!on)pet.CancelChatReaction();});
         display.Children.Add(Text("桌面大小",16));var scale=new WrapPanel();scale.Children.Add(Btn("缩小",()=>pet.ResizePet(-1)));scale.Children.Add(Btn("放大",()=>pet.ResizePet(1)));display.Children.Add(scale);
         display.Children.Add(Text("鼠标放在角色上滚动，也可以调整大小。",12));
         display.Children.Add(Text("按住鼠标中键左右拖动可旋转一整圈。角色获得焦点时，← / → 每次微调 1°。",12));

@@ -145,6 +145,10 @@ public sealed partial class Wheel:Window {
         // Two half-arcs avoid the degeneracy of an SVG-style full-circle arc.
         if(visible.Count==1)visible.Add(new("返回","Back",Back));
         if(route=="home"){DrawStarHome(visible);return;}
+        var appSkin=AppSubwheelScope();
+        if(appSkin!=Subwheel.None && visible.All(item=>!item.Icon.StartsWith("@",StringComparison.Ordinal))){
+            DrawEnamelSubwheel(visible,appSkin,pages>1);return;
+        }
         double span=360.0/visible.Count;for(int i=0;i<visible.Count;i++)Piece(visible[i],-90-span/2+i*span,-90+span/2+i*span);
         Center();
     }
